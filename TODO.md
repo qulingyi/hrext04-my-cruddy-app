@@ -8,6 +8,9 @@
  # Detail Todo
  - [ ] Front End
    - [ ] add due date
+     - [√] add due date selection on interface 
+     - [ ] store due date in local storage 
+     - [ ] add due date on the list
    - [ ] time stamps (moment.js)
    - [ ] upload files/images
    - [ ] UI/UX
