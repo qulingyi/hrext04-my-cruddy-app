@@ -4,6 +4,9 @@ $(document).ready(function() {
     due.min = new Date().toISOString().split("T")[0];
     due.value = due.min;
 
+    //get real-time and display in format 'yyyy-mm-dd, h:mm:ss'
+    let timeStamp = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
+
   $(".add-text-btn").on("click", function(){
 
     // using jquery selector to read input values
@@ -24,7 +27,7 @@ $(document).ready(function() {
     
     // data-uniqID
     let itemHtml = '<div class="display-item" data-storage-key="'+inputKey+'"> ' + inputKey + ' '
-        +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + '</div>';
+        +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div>';
     $(".display").html(itemHtml);
     //console.log(localStorage);
     // how can we delegate this event to the outer html node?

@@ -11,8 +11,15 @@
      - [√] add due date selection on interface
      - [√] set default due date and min due date as today 
      - [√] add due date on the display list
-   - [ ] time stamps (moment.js)
    - [ ] upload files/images
+     - [] insert images inside text
+     - [] image upload in display
+     - [] files are able to view/download 
+   - [ ] time stamps (moment.js)
+     - [√] invoke moment.js
+     - [√] get real-time and format it
+     - [√] display in list
+     - [ ] update timeStamp with edit
    - [ ] UI/UX
      - [ ] fix the layout
      - [ ] delete item confirmation
