@@ -7,10 +7,10 @@
 
  # Detail Todo
  - [ ] Front End
-   - [ ] add due date
-     - [√] add due date selection on interface 
-     - [ ] store due date in local storage 
-     - [ ] add due date on the list
+   - [√] add due date
+     - [√] add due date selection on interface
+     - [√] set default due date and min due date as today 
+     - [√] add due date on the display list
    - [ ] time stamps (moment.js)
    - [ ] upload files/images
    - [ ] UI/UX

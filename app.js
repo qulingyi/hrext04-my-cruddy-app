@@ -1,11 +1,15 @@
 $(document).ready(function() {
 
+    //set due date selection min date as today
+    due.min = new Date().toISOString().split("T")[0];
+    due.value = due.min;
 
   $(".add-text-btn").on("click", function(){
 
     // using jquery selector to read input values
     let inputKey = $(".user-input-title").val();
     let inputValue = $(".user-input-body").val();
+    let dueDate = $("#due").val();
 
     // clear values on the display
     $(".user-input-title").val("");
@@ -19,7 +23,8 @@ $(document).ready(function() {
     localStorage.setItem(inputKey, inputValue);
     
     // data-uniqID
-    let itemHtml = '<div class="display-item" data-storage-key="'+inputKey+'"> ' + inputKey + ' ' +  localStorage.getItem(inputKey) + '</div>';
+    let itemHtml = '<div class="display-item" data-storage-key="'+inputKey+'"> ' + inputKey + ' '
+        +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + '</div>';
     $(".display").html(itemHtml);
     //console.log(localStorage);
     // how can we delegate this event to the outer html node?
