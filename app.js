@@ -28,7 +28,7 @@ $(document).ready(function() {
     // data-uniqID
     let itemHtml = '<div class="display-item" data-storage-key="'+inputKey+'"> ' + inputKey + ' '
         +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div>';
-    $(".display").html(itemHtml);
+    $(".display").append(itemHtml);
     //console.log(localStorage);
     // how can we delegate this event to the outer html node?
     // https://learn.jquery.com/events/event-delegation/

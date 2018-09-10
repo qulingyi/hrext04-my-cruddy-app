@@ -7,29 +7,35 @@
 
  # Detail Todo
  - [ ] Front End
-   - [√] add due date
-     - [√] add due date selection on interface
-     - [√] set default due date and min due date as today 
-     - [√] add due date on the display list
+   - [X] accumulating text in display 
+   - [ ] delete item in display 
+     - [ ] delete item confirmation, ok/cancel
+   - [X] add due date
+     - [X] add due date selection on interface
+     - [X] set default due date and min due date as today 
+     - [X] add due date on the display list
    - [ ] upload files/images
-     - [] insert images inside text
-     - [] image upload in display
-     - [] files are able to view/download 
+     - [ ] insert images inside text
+     - [ ] image upload in display
+     - [ ] files are able to view/download 
    - [ ] time stamps (moment.js)
-     - [√] invoke moment.js
-     - [√] get real-time and format it
-     - [√] display in list
+     - [X] invoke moment.js
+     - [X] get real-time and format it
+     - [X] display in list
      - [ ] update timeStamp with edit
    - [ ] UI/UX
      - [ ] fix the layout
-     - [ ] delete item confirmation
-     - [ ] strike-through completed/deleted items (styling)
+       - [ ] display text in grid
+     - [ ] add checkbox in front
+     - [ ] interactive icon for delete
+     - [ ] interactive icon for edut 
+     - [ ] strike-through completed
      - [ ] add status/priority and allow for sorting 
      based on status/priority 
  - [ ] Library Considerations
     - [ ] underscore
-    - [√] jquery
-    - [ ] moment.js
+    - [X] jquery
+    - [X] moment.js
 
  ## Next Steps
 
