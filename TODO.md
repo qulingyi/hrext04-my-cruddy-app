@@ -5,33 +5,26 @@
  - [√] edit/update item
  - [√] delete item
 
-
  # Detail Todo
  - [ ] Front End
-   - [√] display items
-   - [√] enter new item
-   - [√] select item for edit
-   - [√] select item for delete
-   - [√] a form!
-
+   - [ ] add due date
+   - [ ] time stamps (moment.js)
+   - [ ] upload files/images
    - [ ] UI/UX
-     - [ ] Confirmation of delete/update
-     - [ ] Sortable list
-     - [ ] Navigation/Pagination
-     - [ ] Mouse over Preview
-     - [ ] Searching/Filtering
-     - [ ] Animations/Transitions
-
-  - [ ] Library Considerations
+     - [ ] fix the layout
+     - [ ] delete item confirmation
+     - [ ] strike-through completed/deleted items (styling)
+     - [ ] add status/priority and allow for sorting 
+     based on status/priority 
+ - [ ] Library Considerations
     - [ ] underscore
     - [√] jquery
     - [ ] moment.js
-    - [ ] c3.js (charts.js)
 
  ## Next Steps
 
-  - [ ] factor out common functionality
-  - [ ] testing
+ - [ ] factor out common functionality
+ - [ ] testing
 
 
   ## Feature list
