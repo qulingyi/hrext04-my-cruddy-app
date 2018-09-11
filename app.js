@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    let edit = false;
     //set due date selection min date as today
     due.min = new Date().toISOString().split("T")[0];
     due.value = due.min;
@@ -7,7 +8,7 @@ $(document).ready(function() {
     //get real-time and display in format 'yyyy-mm-dd, h:mm:ss'
     let timeStamp = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
 
-  $(".add-text-btn").on("click", function(){
+  $(".add-text-btn").on("click", function() {
 
     // using jquery selector to read input values
     let inputKey = $(".user-input-title").val();
@@ -24,18 +25,25 @@ $(document).ready(function() {
     
     //https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
     localStorage.setItem(inputKey, inputValue);
-    
+
     // data-uniqID
     let itemHtml = '<div class="display-item" data-storage-key="'+inputKey+'"> ' + inputKey + ' '
         +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div>';
+    if(edit === false) {
     $(".display").append(itemHtml);
+    }
+    if(edit === true) {
+        $("div[data-storage-key =" + "'"+ inputKey + "'" + "]").html(itemHtml);
+      edit = false;
+    }
     //console.log(localStorage);
     // how can we delegate this event to the outer html node?
     // https://learn.jquery.com/events/event-delegation/
-
     $(".display-item").on("click", function(e){
+      edit = true;
       // plop the key:value back into the input boxes
-
+      $(".display-item").css({"background-color": "white"})
+      $("div[data-storage-key =" + "'"+ e.target.dataset.storageKey + "'" + "]").css({"background-color": "red"});
       // get the values from the the data dash properties
       console.log("key=> ", e.target.dataset.storageKey); // user-input-title
       localStorage.getItem(e.target.dataset.storageKey); // user-input-body
@@ -44,10 +52,7 @@ $(document).ready(function() {
       $(".user-input-title").val(e.target.dataset.storageKey);
       $(".user-input-body").val(localStorage.getItem(e.target.dataset.storageKey));
     });
-
   });
-
-
 
    // TODO add back in later
   // example of how to do a filter based on a keyup event
@@ -67,12 +72,9 @@ $(document).ready(function() {
      // refresh from storage?
    });
 
-
    // iterative approach to adding items
    // store data as stringified array of objects
    // store data with individual keys
   // how do we get keys? research Object.keys
-
-
 
 });

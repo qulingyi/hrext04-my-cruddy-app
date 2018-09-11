@@ -8,6 +8,7 @@
  # Detail Todo
  - [ ] Front End
    - [X] accumulating text in display 
+   - [X] update text after edit 
    - [ ] delete item in display 
      - [ ] delete item confirmation, ok/cancel
    - [X] add due date
