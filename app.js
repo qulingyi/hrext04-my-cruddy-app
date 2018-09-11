@@ -10,7 +10,7 @@ $(document).ready(function() {
     let timeStamp = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
 
   //add text function, editing or not
-  $(".add-text-btn").on("click", function() {
+    $(".add-text-btn").on("click", function() {
     console.log("edit condition is : ", editing);
     // using jquery selector to read input values
     let inputKey = $(".user-input-title").val();
@@ -20,16 +20,14 @@ $(document).ready(function() {
     $(".user-input-title").val("");
     $(".user-input-body").val("");
     // console log the input values {key:value}
-    console.log(inputKey, inputValue);
+    //console.log(inputKey, inputValue);
     //https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
     localStorage.setItem(inputKey, inputValue);
-    if(editing === false) {
-    counter++;
-    }
-    console.log(counter);
+    console.log("num is :   ", counter);
     // data-uniqID
     if(editing === false) {
-    let itemHtml = '<div class="display-item" data-num = "' + counter + '" >' +
+        counter ++;
+        let itemHtml = '<div class="display-item" data-num = "' + counter + '" >' +
         '<input class = "check" type = "checkbox" data-num = "' + counter + '"></input> '
         + '<div class = "text" data-num = "' + counter + '" data-storage-key="'+inputKey+'">'
         + inputKey + ' ' +  localStorage.getItem(inputKey)
@@ -55,29 +53,29 @@ $(document).ready(function() {
     });
 
     //strike through function
-    let fuc = 0;
-    $(".display").on("click", 'input[class="check"]', function(a){
-        fuc++;
-        console.log("checkbox!!!!!! " + fuc, $(this).prop("checked"));
+    $(".display").on("click", 'input[class="check"]', function(s){
         if($(this).prop("checked") == true){
-            $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"text-decoration": "line-through"});
-            $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"color": "grey"});
+            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"text-decoration": "line-through"});
+            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "grey"});
         }
         if($(this).prop("checked") == false){
-            $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"text-decoration": ""});
-            $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"color": "black"});
+            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"text-decoration": ""});
+            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "black"});
         }
     });
 
     //edit text function
-    $(".display").on("click", 'img[class="edit"]', function(e)
-    {
-        console.log("I F****** clicked");
-        editing = !editing;
+    $(".display").on("click", 'img[class="edit"]', function(e) {
+        var temp = e.target.dataset.num;
+        if(editing === false || temp === clickNum) {
+            editing = !editing;
+        }
+        console.log("editing status now:   ", editing);
         if(editing === true) {
             $(".add-text-btn").text("save edit");
             clickNum = e.target.dataset.num;
             $(".display-item").css({"background-color": "white"})
+            $("div[data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "white"});
             $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "aqua"});
             console.log("I clicked on: " + e.target.dataset.num);
             localStorage.getItem(e.target.dataset.storageKey); // user-input-body
@@ -88,6 +86,7 @@ $(document).ready(function() {
         if(editing === false) {
             $(".add-text-btn").text("add text");
             $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "white"});
+            $(".display-item").css({"background-color": "white"})
             $(".user-input-title").val("");
             $(".user-input-body").val("");
         }
