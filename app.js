@@ -34,7 +34,7 @@ $(document).ready(function() {
     // data-uniqID
     if(edit === false) {
     let itemHtml = '<div class="display-item" >' +
-        '<input class = "check" type = "checkbox" ></input> '
+        '<input class = "check" type = "checkbox" data-num = "' + counter + '"></input> '
         + '<div class = "text" data-num = "' + counter + '" data-storage-key="'+inputKey+'">'
         + inputKey + ' ' +  localStorage.getItem(inputKey)
         + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div></div>';
@@ -73,19 +73,19 @@ $(document).ready(function() {
           }
         });
     //strike through function
+
     let fuc = 0;
-    $('input[class="check"]').click(function(){
+    $('input[class="check"]').click(function(a){
         fuc++;
         console.log("checkbox!!!!!! " + fuc, $(this).prop("checked"));
         if($(this).prop("checked") == true){
-            $(".text").css({"text-decoration": "line-through"});
+            $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"text-decoration": "line-through"});
         }
         if($(this).prop("checked") == false){
-            $(".text").css({"text-decoration": ""});
+            $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"text-decoration": ""});
         }
-  });
     });
-
+    });
    // TODO add back in later
   // example of how to do a filter based on a keyup event
 //    $(".user-input").on("keyup", function(){
