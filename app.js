@@ -33,25 +33,18 @@ $(document).ready(function() {
     console.log(counter);
 
     // data-uniqID
-    let itemHtml = '<div class="display-item" data-num = "' + counter + '" data-storage-key="'+inputKey+'"> ' + inputKey + ' '
-        +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div>';
+    let itemHtml = '<div class="display-item"><input type = "checkbox" data-num = "' + counter + '" data-storage-key="'+inputKey+'"> ' + inputKey + ' '
+        +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</input></div>';
     if(edit === false) {
-    $(".display").append(itemHtml);
+      $(".display").append(itemHtml);
+      console.log("this is append");
     }
     if(edit === true) {
-        $("div[data-num =" + "'"+ clickNum + "'" + "]").html(itemHtml);
+      $("input[data-num =" + "'"+ clickNum + "'" + "]").replaceWith('<input class="display-item" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'"> ' + inputKey + ' '
+          +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</input>');
+      console.log("this is replace");
       edit = false;
     }
-    //console.log(localStorage);
-    // how can we delegate this event to the outer html node?
-    // https://learn.jquery.com/events/event-delegation/
-    // $(".display-item").on("click", function(e){
-    //   edit = true;
-    //   // plop the key:value back into the input boxes
-    //   $("div[num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "red"});
-    //   // get the values from the the data dash properties
-    //   console.log("key=> ", e.target.dataset.storageKey); // user-input-title
-    // });
   });
         let items = document.querySelector(".display");
 
@@ -60,7 +53,7 @@ $(document).ready(function() {
           edit = true;
           clickNum = e.target.dataset.num;
           $(".display-item").css({"background-color": "white"})
-          $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "red"});
+          $("input[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "red"});
           console.log("I clicked on: " + e.target.dataset.num);
           localStorage.getItem(e.target.dataset.storageKey); // user-input-body
            // set those values in the form fields
