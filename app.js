@@ -37,7 +37,9 @@ $(document).ready(function() {
         '<input class = "check" type = "checkbox" data-num = "' + counter + '"></input> '
         + '<div class = "text" data-num = "' + counter + '" data-storage-key="'+inputKey+'">'
         + inputKey + ' ' +  localStorage.getItem(inputKey)
-        + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div></div>';
+        + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div>'
+        + '<img class = "edit" data-num = "' + counter + '" src = "https://vignette.wikia.nocookie.net/' +
+        'marioluigiplushbros/images/d/d2/Edit.png/revision/latest?cb=20130407014637"></img></div>';
       $(".display").append(itemHtml);
       console.log("this is append");
     }
@@ -52,7 +54,7 @@ $(document).ready(function() {
       edit = false;
     }
 
-        let items = document.querySelector(".display");
+        let items = document.querySelector(".edit");
         items.addEventListener("click", function(e)
         {
           edit = !edit;
@@ -80,9 +82,11 @@ $(document).ready(function() {
         console.log("checkbox!!!!!! " + fuc, $(this).prop("checked"));
         if($(this).prop("checked") == true){
             $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"text-decoration": "line-through"});
+            $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"color": "grey"});
         }
         if($(this).prop("checked") == false){
             $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"text-decoration": ""});
+            $("div[data-num =" + "'"+ a.target.dataset.num + "'" + "]").css({"color": "black"});
         }
     });
     });
