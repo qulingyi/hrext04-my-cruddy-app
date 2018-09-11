@@ -27,10 +27,10 @@
    - [ ] UI/UX
      - [ ] fix the layout
        - [ ] display text in grid
-     - [ ] add checkbox in front
+     - [X] add checkbox in front
      - [ ] interactive icon for delete
-     - [ ] interactive icon for edut 
-     - [ ] strike-through completed
+     - [X] interactive icon for edit 
+     - [X] strike-through completed
      - [ ] add status/priority and allow for sorting 
      based on status/priority 
  - [ ] Library Considerations
