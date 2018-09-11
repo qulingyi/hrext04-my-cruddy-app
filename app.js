@@ -20,11 +20,10 @@ $(document).ready(function() {
     // clear values on the display
     $(".user-input-title").val("");
     $(".user-input-body").val("");
-    
+
     // console log the input values {key:value}
     console.log(inputKey, inputValue);
-    
-    
+
     //https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
     localStorage.setItem(inputKey, inputValue);
     if(edit === false) {
@@ -33,33 +32,59 @@ $(document).ready(function() {
     console.log(counter);
 
     // data-uniqID
-    let itemHtml = '<div class="display-item"><input type = "checkbox" data-num = "' + counter + '" data-storage-key="'+inputKey+'"> ' + inputKey + ' '
-        +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</input></div>';
     if(edit === false) {
+    let itemHtml = '<div class="display-item" >' +
+        '<input class = "check" type = "checkbox" ></input> '
+        + '<div class = "text" data-num = "' + counter + '" data-storage-key="'+inputKey+'">'
+        + inputKey + ' ' +  localStorage.getItem(inputKey)
+        + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div></div>';
       $(".display").append(itemHtml);
       console.log("this is append");
     }
     if(edit === true) {
-      $("input[data-num =" + "'"+ clickNum + "'" + "]").replaceWith('<input class="display-item" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'"> ' + inputKey + ' '
-          +  localStorage.getItem(inputKey) + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</input>');
+      $("div[data-num =" + "'"+ clickNum + "'" + "]").replaceWith(
+          '<div class="display-item" >' + '<input class = "check" type = "checkbox" ></input> '
+          + '<div class = "text" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'">'
+          + inputKey + ' ' +  localStorage.getItem(inputKey)
+          + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div></div>');
+        //$(".display").append(itemHtml);
       console.log("this is replace");
       edit = false;
     }
-  });
-        let items = document.querySelector(".display");
 
+        let items = document.querySelector(".display");
         items.addEventListener("click", function(e)
         {
-          edit = true;
+          edit = !edit;
+          if(edit === true) {
           clickNum = e.target.dataset.num;
           $(".display-item").css({"background-color": "white"})
-          $("input[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "red"});
+          $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "red"});
           console.log("I clicked on: " + e.target.dataset.num);
           localStorage.getItem(e.target.dataset.storageKey); // user-input-body
            // set those values in the form fields
           $(".user-input-title").val(e.target.dataset.storageKey);
           $(".user-input-body").val(localStorage.getItem(e.target.dataset.storageKey));
+          }
+          if(edit === false) {
+          $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "white"});
+          $(".user-input-title").val("");
+          $(".user-input-body").val("");
+          }
         });
+    //strike through function
+    let fuc = 0;
+    $('input[class="check"]').click(function(){
+        fuc++;
+        console.log("checkbox!!!!!! " + fuc, $(this).prop("checked"));
+        if($(this).prop("checked") == true){
+            $(".text").css({"text-decoration": "line-through"});
+        }
+        if($(this).prop("checked") == false){
+            $(".text").css({"text-decoration": ""});
+        }
+  });
+    });
 
    // TODO add back in later
   // example of how to do a filter based on a keyup event
@@ -68,7 +93,6 @@ $(document).ready(function() {
 //      localStorage.setItem("testStorage", inputValue);
 //      $(".display").text(localStorage.getItem("testStorage"));
 //    });
-
    $(".del-text-btn").on("click", function() {
      alert('item deleted? check the console'); // maybe change to a window.confirm
      localStorage.removeItem( $('.user-input-title').val() ); // grab the title and plop here
@@ -84,4 +108,8 @@ $(document).ready(function() {
    // store data with individual keys
   // how do we get keys? research Object.keys
 
+  //add checkbox strike through
+
+
+  // });
 });
