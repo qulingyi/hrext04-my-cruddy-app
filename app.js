@@ -123,7 +123,12 @@ $(document).ready(function() {
         // after item is removed from local storage, redisplay items from local storage
         // refresh from storage?
     });
-    //test function
+
+    //delete text in field function
+    $(".del-text-btn").on("click", function () {
+        $(".user-input-title").val("");
+        $(".user-input-body").val("");
+    })
 
    // TODO add back in later
   // example of how to do a filter based on a keyup event
