@@ -8,13 +8,6 @@ $(document).ready(function() {
     due.value = due.min;
     //get real-time and display in format 'yyyy-mm-dd, h:mm:ss'
 
-    function delete_item(dd) {
-        var r = confirm("Want to delete is line?");
-        if (r == true) {
-            console.log("deleted clicked");
-            $("div[data-num =" + "'" + dd.target.dataset.num + "'" + "]").remove();
-        }
-    }
   //add text function, editing or not
     $(".add-text-btn").on("click", function() {
     let timeStamp = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
@@ -45,7 +38,7 @@ $(document).ready(function() {
         'marioluigiplushbros/images/d/d2/Edit.png/revision/latest?cb=20130407014637"></img>'
         + '<img class = "delete" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
             'src = "http://pngimage.net/wp-content/' +
-        'uploads/2018/06/icon-hapus-png-8.png" onclick = "delete_item()"></img></div>';
+        'uploads/2018/06/icon-hapus-png-8.png" ></img></div>';
         $(".display").append(itemHtml);
         console.log("this is append");
     }
@@ -121,7 +114,15 @@ $(document).ready(function() {
 
     //delete functions
     $(".display").on("click", "img[class='delete']", function(d) {
-        delete_item(d);
+            // $("img[class='delete'][data-num =" + "'"+ d.target.dataset.num + "'" + "]").css(
+            //     {"box-shadow": "2px 2px 1px grey"});
+            var r = confirm("Want to delete is line?");
+            if (r == true) {
+                $("div[data-num =" + "'" + d.target.dataset.num + "'" + "]").remove();
+             } //else {
+            //     $("img[class='delete'][data-num =" + "'" + d.target.dataset.num + "'" + "]").css(
+            //         {"box-shadow": ""});
+            // }
         //alert('item deleted? check the console'); // maybe change to a window.confirm
         localStorage.removeItem( $('.user-input-title').val() ); // grab the title and plop here
         $(".user-input-title").val("");

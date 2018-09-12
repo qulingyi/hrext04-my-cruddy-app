@@ -10,8 +10,8 @@
    - [X] accumulating text in display 
    - [X] update text after edit 
    - [X] delete button empty text field 
-   - [ ] delete item in display 
-     - [ ] delete item confirmation, ok/cancel
+   - [X] delete item in display 
+     - [X] delete item confirmation, ok/cancel
    - [X] add due date
      - [X] add due date selection on interface
      - [X] set default due date and min due date as today 
