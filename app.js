@@ -7,10 +7,10 @@ $(document).ready(function() {
     due.min = new Date().toISOString().split("T")[0];
     due.value = due.min;
     //get real-time and display in format 'yyyy-mm-dd, h:mm:ss'
-    let timeStamp = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
 
   //add text function, editing or not
     $(".add-text-btn").on("click", function() {
+    let timeStamp = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
     console.log("edit condition is : ", editing);
     // using jquery selector to read input values
     let inputKey = $(".user-input-title").val();
@@ -26,31 +26,40 @@ $(document).ready(function() {
     console.log("num is :   ", counter);
     // data-uniqID
     if(editing === false) {
-        counter ++;
+        counter++;
         let itemHtml = '<div class="display-item" data-num = "' + counter + '" >' +
         '<input class = "check" type = "checkbox" data-num = "' + counter + '"></input> '
         + '<div class = "text" data-num = "' + counter + '" data-storage-key="'+inputKey+'">'
         + inputKey + ' ' +  localStorage.getItem(inputKey)
         + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div>'
-        + '<img class = "edit" data-num = "' + counter + '" src = "https://vignette.wikia.nocookie.net/' +
+        + '<img class = "edit" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
+            'src = "https://vignette.wikia.nocookie.net/' +
         'marioluigiplushbros/images/d/d2/Edit.png/revision/latest?cb=20130407014637"></img>'
-        + '<img class = "delete" data-num = "' + counter + '" src = "http://pngimage.net/wp-content/' +
+        + '<img class = "delete" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
+            'src = "http://pngimage.net/wp-content/' +
         'uploads/2018/06/icon-hapus-png-8.png"></img></div>';
-      $(".display").append(itemHtml);
-      console.log("this is append");
+        $(".display").append(itemHtml);
+        console.log("this is append");
     }
     if(editing === true) {
+        let newTime = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
         $(".add-text-btn").text("add text");
-        $("div[data-num =" + "'"+ clickNum + "'" + "]").replaceWith(
-          '<div class="display-item" >'
-          + '<div class = "text" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'">'
-          + inputKey + ' ' +  localStorage.getItem(inputKey)
-          + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div></div>');
-        //$(".display").append(itemHtml);
-      console.log("this is replace");
-      editing = false;
+        $("div[class='display-item'][data-num =" + "'"+ clickNum + "'" + "]").replaceWith(
+            '<div class="display-item" data-num = "' + clickNum + '" >' +
+            '<input class = "check" type = "checkbox" data-num = "' + clickNum + '"></input> '
+            + '<div class = "text" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'">'
+            + inputKey + ' ' +  localStorage.getItem(inputKey)
+            + " Due Date: " +  dueDate + " Created at: " +  newTime +  '</div>'
+            + '<img class = "edit" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'" ' +
+            'src = "https://vignette.wikia.nocookie.net/' +
+            'marioluigiplushbros/images/d/d2/Edit.png/revision/latest?cb=20130407014637"></img>'
+            + '<img class = "delete" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'" ' +
+            'src = "http://pngimage.net/wp-content/' +
+            'uploads/2018/06/icon-hapus-png-8.png"></img></div>');
+        console.log("this is replace");
+        editing = false;
     }
-    });
+  });
 
     //strike through function
     $(".display").on("click", 'input[class="check"]', function(s){
@@ -67,6 +76,7 @@ $(document).ready(function() {
     //edit text function
     $(".display").on("click", 'img[class="edit"]', function(e) {
         var temp = e.target.dataset.num;
+        console.log("Look the temp: ", temp);
         if(editing === false || temp === clickNum) {
             editing = !editing;
         }
@@ -74,15 +84,18 @@ $(document).ready(function() {
         if(editing === true) {
             $(".add-text-btn").text("save edit");
             clickNum = e.target.dataset.num;
+            console.log("Look the clickNum: ", clickNum)
             $("div[class='text'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
                 {"background-color": "aqua"});
             $("div[class='text'][data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css(
                 {"background-color": "white"});
             localStorage.getItem(e.target.dataset.storageKey); // user-input-body
             // set those values in the form fields
+            console.log("Key =>", e.target.dataset.storageKey);
+            console.log("Body =>", localStorage.getItem(e.target.dataset.storageKey));
             $(".user-input-title").val(e.target.dataset.storageKey);
             $(".user-input-body").val(localStorage.getItem(e.target.dataset.storageKey));
-            //
+            //edit icon shadow effect
             $("img[class='edit'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
                 {"box-shadow": "2px 2px 1px grey"});
             $("img[class='edit'][data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css(

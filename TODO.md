@@ -19,22 +19,21 @@
      - [ ] insert images inside text
      - [ ] image upload in display
      - [ ] files are able to view/download 
-   - [ ] time stamps (moment.js)
+   - [X] time stamps (moment.js)
      - [X] invoke moment.js
      - [X] get real-time and format it
      - [X] display in list
-     - [ ] update timeStamp with edit
+     - [X] update timeStamp with edit
    - [ ] UI/UX
      - [ ] fix the layout
        - [ ] display text in grid
      - [X] add checkbox in front
-     - [ ] interactive icon for delete
+     - [X] interactive icon for delete
      - [X] interactive icon for edit 
      - [X] strike-through completed
      - [ ] add status/priority and allow for sorting 
      based on status/priority 
- - [ ] Library Considerations
-    - [ ] underscore
+ - [X] Library Considerations
     - [X] jquery
     - [X] moment.js
 
