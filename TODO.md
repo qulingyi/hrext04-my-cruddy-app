@@ -9,6 +9,7 @@
  - [ ] Front End
    - [X] accumulating text in display 
    - [X] update text after edit 
+   - [X] delete button empty text field 
    - [ ] delete item in display 
      - [ ] delete item confirmation, ok/cancel
    - [X] add due date
