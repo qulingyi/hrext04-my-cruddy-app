@@ -74,26 +74,32 @@ $(document).ready(function() {
         if(editing === true) {
             $(".add-text-btn").text("save edit");
             clickNum = e.target.dataset.num;
-            $(".display-item").css({"background-color": "white"})
-            $("div[data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "white"});
-            $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "aqua"});
-            console.log("I clicked on: " + e.target.dataset.num);
+            $("div[class='text'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
+                {"background-color": "aqua"});
+            $("div[class='text'][data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css(
+                {"background-color": "white"});
             localStorage.getItem(e.target.dataset.storageKey); // user-input-body
             // set those values in the form fields
             $(".user-input-title").val(e.target.dataset.storageKey);
             $(".user-input-body").val(localStorage.getItem(e.target.dataset.storageKey));
+            //
+            $("img[class='edit'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
+                {"box-shadow": "2px 2px 1px grey"});
+            $("img[class='edit'][data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css(
+                {"box-shadow": ""});
         }
         if(editing === false) {
             $(".add-text-btn").text("add text");
             $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "white"});
-            $(".display-item").css({"background-color": "white"})
+            $("img[class='edit'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
+                {"box-shadow": ""});
             $(".user-input-title").val("");
             $(".user-input-body").val("");
         }
     });
 
     //delete functions
-    $(".display").on("click", 'img[class="delete"]', function(d) {
+    $(".display").on("click", "img[class='delete']", function(d) {
         console.log("deleted clicked");
         $("div[data-num =" + "'"+ d.target.dataset.num + "'" + "]").remove();
         //alert('item deleted? check the console'); // maybe change to a window.confirm
