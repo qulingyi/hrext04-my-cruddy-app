@@ -30,17 +30,15 @@ $(document).ready(function() {
         counter++;
         let itemHtml = '<div class="display-item" data-num = "' + counter + '" >' +
         '<input class = "check" type = "checkbox" data-num = "' + counter + '"></input> '
-        + '<div class = "container">'
+            + '<img class = "edit" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
+            'src = https://image.flaticon.com/icons/svg/1102/1102457.svg></img>'
+            + '<img class = "delete" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
+            'src = "https://image.flaticon.com/icons/svg/618/618373.svg" ></img>'
+        + '<div class = "container" data-num = "' + counter + '">'
         + '<div class = "text" data-num = "' + counter + '" data-storage-key="'+inputKey+'">'
-        + inputKey + ' ' +  localStorage.getItem(inputKey) + '</div>'
+        + inputKey + ':\xa0\xa0\xa0' +  localStorage.getItem(inputKey) + '</div>'
         + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
-        + '<div class = "time">' + " Created at: " +  timeStamp +  '</div></div>'
-        + '<img class = "edit" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
-            'src = "https://vignette.wikia.nocookie.net/' +
-        'marioluigiplushbros/images/d/d2/Edit.png/revision/latest?cb=20130407014637"></img>'
-        + '<img class = "delete" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
-            'src = "http://pngimage.net/wp-content/' +
-        'uploads/2018/06/icon-hapus-png-8.png" ></img></div>';
+        + '<div class = "time">' + " Created at: " +  timeStamp +  '</div></div></div>';
         $(".display").append(itemHtml);
         console.log("this is append");
     }
@@ -50,31 +48,31 @@ $(document).ready(function() {
         $("div[class='display-item'][data-num =" + "'"+ clickNum + "'" + "]").replaceWith(
             '<div class="display-item" data-num = "' + clickNum + '" >' +
             '<input class = "check" type = "checkbox" data-num = "' + clickNum + '"></input> '
-            + '<div class = "container">'
-            + '<div class = "text" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'">'
-            + inputKey + ' ' +  localStorage.getItem(inputKey) + '</div>'
-            + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
-            + '<div class = "time">' + " Created at: " +  newTime +  '</div></div>'
             + '<img class = "edit" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'" ' +
-            'src = "https://vignette.wikia.nocookie.net/' +
-            'marioluigiplushbros/images/d/d2/Edit.png/revision/latest?cb=20130407014637"></img>'
+            'src = https://image.flaticon.com/icons/svg/1102/1102457.svg></img>'
             + '<img class = "delete" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'" ' +
-            'src = "http://pngimage.net/wp-content/' +
-            'uploads/2018/06/icon-hapus-png-8.png"></img></div>');
+            'src = "https://image.flaticon.com/icons/svg/618/618373.svg" ></img>'
+            + '<div class = "container" data-num = "' + clickNum + '">'
+            + '<div class = "text" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'">'
+            + inputKey + ':\xa0\xa0\xa0' +  localStorage.getItem(inputKey) + '</div>'
+            + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
+            + '<div class = "time">' + " Created at: " +  newTime +  '</div></div></div>');
         console.log("this is replace");
         editing = false;
     }
   });
 
-    //strike through function
+    //checkbox checked function
     $(".display").on("click", 'input[class="check"]', function(s){
         if($(this).prop("checked") == true){
             $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"text-decoration": "line-through"});
             $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "grey"});
+            $("div[class='display-item'][data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"opacity": 0.5});
         }
         if($(this).prop("checked") == false){
             $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"text-decoration": ""});
-            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "black"});
+            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "mediumslateblue"});
+            $("div[class='display-item'][data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"opacity": ""});
         }
     });
 
@@ -91,9 +89,9 @@ $(document).ready(function() {
             clickNum = e.target.dataset.num;
             console.log("Look the clickNum: ", clickNum)
             $("div[class='text'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
-                {"background-color": "aqua"});
+                {"background-color": "paleturquoise"});
             $("div[class='text'][data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css(
-                {"background-color": "white"});
+                {"background-color": ""});
             localStorage.getItem(e.target.dataset.storageKey); // user-input-body
             // set those values in the form fields
             console.log("Key =>", e.target.dataset.storageKey);
@@ -108,7 +106,7 @@ $(document).ready(function() {
         }
         if(editing === false) {
             $(".add-text-btn").text("add text");
-            $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": "white"});
+            $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": ""});
             $("img[class='edit'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
                 {"box-shadow": ""});
             $(".user-input-title").val("");
