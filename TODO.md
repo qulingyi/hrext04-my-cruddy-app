@@ -7,6 +7,7 @@
 
  # Detail Todo
  - [ ] Front End
+   - [X] alert due date function
    - [X] accumulating text in display 
    - [X] update text after edit 
    - [X] delete button empty text field 
