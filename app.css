@@ -2,6 +2,14 @@ body {
     background: linear-gradient(to right, rgb(116, 235, 213), rgb(172, 182, 229));
 }
 
+.welcome {
+    text-align: center;
+    color: white;
+    font-size: 35px;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
+    Helvetica Neue,Ubuntu,Arial,sans-serif;
+}
+
 .display {
     display: flex;
     flex-wrap: wrap;
@@ -21,46 +29,12 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.container {
+.icon_container {
+    height: 35px;
     display: flex;
-    flex-wrap: wrap;
-    width: 150px;
-    margin-left: 20px;
-    padding-top: -20px;
-}
-.edit {
-    width: 20px;
-    height: 20px;
-    margin-left: 67px;
-    margin-top: 8px;
-}
-.delete {
-    width: 20px;
-    height: 20px;
-    margin-left: 60px;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
-.due {
-    color: #F9D758;
-    font-size: 13.5px;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
-    Helvetica Neue,Ubuntu,Arial,sans-serif;
-}
-.time {
-    font-family:  -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
-    Helvetica Neue,Ubuntu,Arial,sans-serif;
-    font-size: 2px;
-    color: grey;
-}
-
-.text {
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
-    Helvetica Neue,Ubuntu,Arial,sans-serif;
-    color: #87edd7;
-    width: 150px;
-    word-wrap: break-word;
-}
 input[type=checkbox]
 {
     /* Double-sized Checkboxes */
@@ -68,6 +42,70 @@ input[type=checkbox]
     -moz-transform: scale(1.5); /* FF */
     -webkit-transform: scale(1.5); /* Safari and Chrome */
     -o-transform: scale(1.5); /* Opera */
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 12px;
 }
+
+.edit {
+    width: 20px;
+    height: 20px;
+    margin-left: 120px;
+}
+.delete {
+    width: 20px;
+    height: 20px;
+    margin-left: 7px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 150px;
+    margin: 0 auto;
+    padding: 5px 10px 5px 10px;
+}
+.title {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 110%;
+}
+.content {
+    text-align: left;
+    margin-top: 5px;
+    font-size: 80%;
+}
+.text {
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
+    Helvetica Neue,Ubuntu,Arial,sans-serif;
+    color: white;
+    width: 150px;
+    height: 120px;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.text:after {
+    content: "";
+    background: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+}
+
+.due {
+    color: #87edd7;
+    font-size: 72%;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
+    Helvetica Neue,Ubuntu,Arial,sans-serif;
+    margin-top: 15px;
+}
+
+.time {
+    font-family:  -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
+    Helvetica Neue,Ubuntu,Arial,sans-serif;
+    font-size: 0.5px;
+    color: lightgrey;
+    margin-top: 10px;
+}
+

@@ -37,7 +37,7 @@ $(document).ready(function() {
             'src = "https://image.flaticon.com/icons/svg/1101/1101702.svg" ></img></div>'
         + '<div class = "container" data-num = "' + counter + '">'
         + '<div class = "text" data-num = "' + counter + '" data-storage-key="'+inputKey+'">'
-        + inputKey + ':\xa0\xa0\xa0' +  localStorage.getItem(inputKey) + '</div>'
+        + '<p class = "title">' +  inputKey + '</p><p class="content">' +  localStorage.getItem(inputKey) + '</p></div>'
         + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
         + '<div class = "time">' + " Created at: " +  timeStamp +  '</div></div></div>';
         $(".display").append(itemHtml);
@@ -56,7 +56,7 @@ $(document).ready(function() {
             'src = "https://image.flaticon.com/icons/svg/1101/1101702.svg" ></img></div>'
             + '<div class = "container" data-num = "' + clickNum + '">'
             + '<div class = "text" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'">'
-            + inputKey + ':\xa0\xa0\xa0' +  localStorage.getItem(inputKey) + '</div>'
+            + '<p class = "title">' +  inputKey + '</p><p class="content">'  +  localStorage.getItem(inputKey) + '</div>'
             + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
             + '<div class = "time">' + " Created at: " +  newTime +  '</div></div></div>');
         console.log("this is replace");
@@ -69,11 +69,11 @@ $(document).ready(function() {
         if($(this).prop("checked") == true){
             $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"text-decoration": "line-through"});
             $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "grey"});
-            $("div[class='display-item'][data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"opacity": 0.5});
+            $("div[class='display-item'][data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"opacity": 0.4});
         }
         if($(this).prop("checked") == false){
             $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"text-decoration": ""});
-            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "#87edd7"});
+            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "white"});
             $("div[class='display-item'][data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"opacity": ""});
         }
     });
@@ -91,7 +91,7 @@ $(document).ready(function() {
             clickNum = e.target.dataset.num;
             console.log("Look the clickNum: ", clickNum)
             $("div[class='container'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
-                {"border": "2px solid white"});
+                {"border": "2px dashed white"});
             $("div[class='container'][data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css(
                 {"border": ""});
             localStorage.getItem(e.target.dataset.storageKey); // user-input-body
@@ -108,9 +108,10 @@ $(document).ready(function() {
         }
         if(editing === false) {
             $(".add-text-btn").text("add text");
-            $("div[data-num =" + "'"+ e.target.dataset.num + "'" + "]").css({"background-color": ""});
-            $("img[class='edit'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
+            $("div[class='container']").css(
                 {"border": ""});
+            $("img[class='edit']").css(
+                {"box-shadow": ""});
             $(".user-input-title").val("");
             $(".user-input-body").val("");
         }

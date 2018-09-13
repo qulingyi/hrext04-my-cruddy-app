@@ -7,6 +7,7 @@
 
  # Detail Todo
  - [ ] Front End
+   - [ ] add status/priority and allow for sorting 
    - [X] alert due date function
    - [X] accumulating text in display 
    - [X] update text after edit 
@@ -26,14 +27,13 @@
      - [X] get real-time and format it
      - [X] display in list
      - [X] update timeStamp with edit
-   - [ ] UI/UX
-     - [ ] fix the layout
-       - [ ] display text in grid
+   - [X] UI/UX
+     - [X] fix the layout
+       - [X] display text in grid
      - [X] add checkbox in front
      - [X] interactive icon for delete
      - [X] interactive icon for edit 
      - [X] strike-through completed
-     - [ ] add status/priority and allow for sorting 
      based on status/priority 
  - [X] Library Considerations
     - [X] jquery
