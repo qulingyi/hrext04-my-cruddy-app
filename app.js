@@ -30,9 +30,11 @@ $(document).ready(function() {
         counter++;
         let itemHtml = '<div class="display-item" data-num = "' + counter + '" >' +
         '<input class = "check" type = "checkbox" data-num = "' + counter + '"></input> '
+        + '<div class = "container">'
         + '<div class = "text" data-num = "' + counter + '" data-storage-key="'+inputKey+'">'
-        + inputKey + ' ' +  localStorage.getItem(inputKey)
-        + " Due Date: " +  dueDate + " Created at: " +  timeStamp +  '</div>'
+        + inputKey + ' ' +  localStorage.getItem(inputKey) + '</div>'
+        + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
+        + '<div class = "time">' + " Created at: " +  timeStamp +  '</div></div>'
         + '<img class = "edit" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
             'src = "https://vignette.wikia.nocookie.net/' +
         'marioluigiplushbros/images/d/d2/Edit.png/revision/latest?cb=20130407014637"></img>'
@@ -48,9 +50,11 @@ $(document).ready(function() {
         $("div[class='display-item'][data-num =" + "'"+ clickNum + "'" + "]").replaceWith(
             '<div class="display-item" data-num = "' + clickNum + '" >' +
             '<input class = "check" type = "checkbox" data-num = "' + clickNum + '"></input> '
+            + '<div class = "container">'
             + '<div class = "text" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'">'
-            + inputKey + ' ' +  localStorage.getItem(inputKey)
-            + " Due Date: " +  dueDate + " Created at: " +  newTime +  '</div>'
+            + inputKey + ' ' +  localStorage.getItem(inputKey) + '</div>'
+            + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
+            + '<div class = "time">' + " Created at: " +  newTime +  '</div></div>'
             + '<img class = "edit" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'" ' +
             'src = "https://vignette.wikia.nocookie.net/' +
             'marioluigiplushbros/images/d/d2/Edit.png/revision/latest?cb=20130407014637"></img>'
@@ -149,4 +153,7 @@ $(document).ready(function() {
    // store data as stringified array of objects
    // store data with individual keys
   // how do we get keys? research Object.keys
+
+   //upload image
 });
+
