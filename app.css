@@ -2,6 +2,14 @@ body {
     background: linear-gradient(to right, rgb(116, 235, 213), rgb(172, 182, 229));
 }
 
+.inputs {
+    width: 390px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+}
+
 .welcome {
     text-align: center;
     color: white;
@@ -15,7 +23,13 @@ body {
     flex-wrap: wrap;
     margin: 0 auto;
     width: 1000px;
+}
 
+.add {
+    width: 110px;
+    height: 110px;
+    margin-top: 75px;
+    margin-left: 45px;
 }
 
 .display-item {
@@ -72,7 +86,15 @@ input[type=checkbox]
     text-align: left;
     margin-top: 5px;
     font-size: 80%;
+    overflow: hidden;
+    height: 50px;
+    text-overflow: ellipsis;
 }
+
+.content:hover {
+    overflow: visible;
+}
+
 .text {
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,
     Helvetica Neue,Ubuntu,Arial,sans-serif;

@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     let counter = 0;
     let editing = false;
+    let adding = false;
     let clickNum;
     //set due date selection min date as today
     due.min = new Date().toISOString().split("T")[0];
@@ -9,7 +10,17 @@ $(document).ready(function() {
     //get real-time and display in format 'yyyy-mm-dd, h:mm:ss'
     let timeStamp = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
 
-  //add text function, editing or not
+    //append add new function
+    let addNew = function() {
+        let newNote = '<div class="display-item" data-num = "' + counter + '" >'
+        + '<img class = "add" src = "https://image.flaticon.com/icons/svg/545/545748.svg">'
+        + '</img></div>';
+        $(".display").append(newNote);
+    }
+
+    addNew();
+
+    //add text function, editing or not
     $(".add-text-btn").on("click", function() {
     console.log("edit condition is : ", editing);
     // using jquery selector to read input values
@@ -27,7 +38,7 @@ $(document).ready(function() {
     // data-uniqID
 
     if(editing === false) {
-        counter++;
+
         let itemHtml = '<div class="display-item" data-num = "' + counter + '" >' +
         '<div class = "icon_container">' +
         '<input class = "check" type = "checkbox" data-num = "' + counter + '"></input> '
@@ -40,7 +51,11 @@ $(document).ready(function() {
         + '<p class = "title">' +  inputKey + '</p><p class="content">' +  localStorage.getItem(inputKey) + '</p></div>'
         + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
         + '<div class = "time">' + " Created at: " +  timeStamp +  '</div></div></div>';
-        $(".display").append(itemHtml);
+        $("div[class='display-item'][data-num =" + "'"+ counter + "'" + "]").replaceWith(itemHtml);
+        counter++;
+        addNew();
+        adding = !adding;
+        $("div[class='inputs']").css({"visibility": "hidden"});
         console.log("this is append");
     }
     if(editing === true) {
@@ -63,6 +78,23 @@ $(document).ready(function() {
         editing = false;
     }
   });
+
+
+    //click add new note show inputs function
+    $(".display").on("click", "img[class='add']", function(p) {
+        console.log("add new!")
+        // var temp = p.target.dataset.num;
+        // if(adding === false || temp === clickNum) {
+             adding = !adding;
+        // }
+        console.log("adding situation : ", adding);
+        if(adding === false) {
+            $("div[class='inputs']").css({"visibility": "hidden"});
+        }
+        if(adding === true) {
+            $("div[class='inputs']").css({"visibility": "visible"});
+        }
+    });
 
     //checkbox checked function
     $(".display").on("click", 'input[class="check"]', function(s){
@@ -105,6 +137,7 @@ $(document).ready(function() {
                 {"box-shadow": "2px 2px 1px grey"});
             $("img[class='edit'][data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css(
                 {"box-shadow": ""});
+            $("div[class='inputs']").css({"visibility": "visible"});
         }
         if(editing === false) {
             $(".add-text-btn").text("add text");
@@ -114,6 +147,7 @@ $(document).ready(function() {
                 {"box-shadow": ""});
             $(".user-input-title").val("");
             $(".user-input-body").val("");
+            $("div[class='inputs']").css({"visibility": "hidden"});
         }
     });
 
