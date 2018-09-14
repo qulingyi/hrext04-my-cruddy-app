@@ -128,7 +128,7 @@ $(document).ready(function() {
         }
         console.log("editing status now:   ", editing);
         if(editing === true) {
-            $(".add-text-btn").text("save edit");
+            $(".add-text-btn").text("Save");
             clickNum = e.target.dataset.num;
             console.log("Look the clickNum: ", clickNum)
             localStorage.getItem(e.target.dataset.storageKey); // user-input-body
@@ -141,7 +141,7 @@ $(document).ready(function() {
             let top_po = po.position().top + 20;
             $("div[class='inputs']").css({"top": "" + top_po + "px"})
             $("div[class='inputs']").css({"visibility": "visible"});
-            $("div[class='inputs']").css({"background-color": "rgba(147, 232, 214, 0.8)"});
+            $("div[class='inputs']").css({"background-color": "rgba(147, 232, 214, 0.9)"});
         }
         if(editing === false) {
             $(".add-text-btn").text("add text");
