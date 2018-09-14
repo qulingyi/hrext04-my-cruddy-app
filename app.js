@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    let counter = 0;
+    let counter = 1;
     let editing = false;
     let adding = false;
     let clickNum;
@@ -13,7 +13,8 @@ $(document).ready(function() {
     //append add new function
     let addNew = function() {
         let newNote = '<div class="display-item" data-num = "' + counter + '" >'
-        + '<img class = "add" src = "https://image.flaticon.com/icons/svg/545/545748.svg">'
+        + '<img class = "add" data-num = "' + counter + '"' +
+            ' src = "https://image.flaticon.com/icons/svg/545/545748.svg">'
         + '</img></div>';
         $(".display").append(newNote);
     }
@@ -76,18 +77,20 @@ $(document).ready(function() {
             + '<div class = "time">' + " Created at: " +  newTime +  '</div></div></div>');
         console.log("this is replace");
         editing = false;
+        adding = false;
+        $("div[class='inputs']").css({"visibility": "hidden"});
     }
   });
 
 
     //click add new note show inputs function
     $(".display").on("click", "img[class='add']", function(p) {
-        console.log("add new!")
-        // var temp = p.target.dataset.num;
-        // if(adding === false || temp === clickNum) {
-             adding = !adding;
-        // }
-        console.log("adding situation : ", adding);
+        adding = !adding;
+        let po = $("img[class='add'][data-num =" + "'"+ p.target.dataset.num + "'" + "]");
+        let left_po = po.position().left;
+        $("div[class='inputs']").css({"left": "" + left_po + "px"})
+        let top_po = po.position().top;
+        $("div[class='inputs']").css({"top": "" + top_po + "px"})
         if(adding === false) {
             $("div[class='inputs']").css({"visibility": "hidden"});
         }
@@ -96,11 +99,17 @@ $(document).ready(function() {
         }
     });
 
+    //close add text function
+     $("p[class='close']").on("click", function() {
+         $("div[class='inputs']").css({"visibility": "hidden"});
+         adding = !adding;
+    });
+
     //checkbox checked function
     $(".display").on("click", 'input[class="check"]', function(s){
         if($(this).prop("checked") == true){
             $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"text-decoration": "line-through"});
-            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "grey"});
+            $("div[data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"color": "lightgrey"});
             $("div[class='display-item'][data-num =" + "'"+ s.target.dataset.num + "'" + "]").css({"opacity": 0.4});
         }
         if($(this).prop("checked") == false){
@@ -122,29 +131,20 @@ $(document).ready(function() {
             $(".add-text-btn").text("save edit");
             clickNum = e.target.dataset.num;
             console.log("Look the clickNum: ", clickNum)
-            $("div[class='container'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
-                {"border": "2px dashed white"});
-            $("div[class='container'][data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css(
-                {"border": ""});
             localStorage.getItem(e.target.dataset.storageKey); // user-input-body
             // set those values in the form fields
-            console.log("Key =>", e.target.dataset.storageKey);
-            console.log("Body =>", localStorage.getItem(e.target.dataset.storageKey));
             $(".user-input-title").val(e.target.dataset.storageKey);
             $(".user-input-body").val(localStorage.getItem(e.target.dataset.storageKey));
-            //edit icon shadow effect
-            $("img[class='edit'][data-num =" + "'"+ e.target.dataset.num + "'" + "]").css(
-                {"box-shadow": "2px 2px 1px grey"});
-            $("img[class='edit'][data-num !=" + "'"+ e.target.dataset.num + "'" + "]").css(
-                {"box-shadow": ""});
+            let po = $("div[class='display-item'][data-num =" + "'"+ e.target.dataset.num + "'" + "]");
+            let left_po = po.position().left + 20;
+            $("div[class='inputs']").css({"left": "" + left_po  + "px"})
+            let top_po = po.position().top + 20;
+            $("div[class='inputs']").css({"top": "" + top_po + "px"})
             $("div[class='inputs']").css({"visibility": "visible"});
+            $("div[class='inputs']").css({"background-color": "rgba(147, 232, 214, 0.8)"});
         }
         if(editing === false) {
             $(".add-text-btn").text("add text");
-            $("div[class='container']").css(
-                {"border": ""});
-            $("img[class='edit']").css(
-                {"box-shadow": ""});
             $(".user-input-title").val("");
             $(".user-input-body").val("");
             $("div[class='inputs']").css({"visibility": "hidden"});
@@ -155,7 +155,7 @@ $(document).ready(function() {
     $(".display").on("click", "img[class='delete']", function(d) {
             // $("img[class='delete'][data-num =" + "'"+ d.target.dataset.num + "'" + "]").css(
             //     {"box-shadow": "2px 2px 1px grey"});
-            var r = confirm("Want to delete is line?");
+            var r = confirm("Want to delete note: " + d.target.dataset.num +  "?");
             if (r == true) {
                 $("div[data-num =" + "'" + d.target.dataset.num + "'" + "]").remove();
              } //else {
@@ -196,10 +196,10 @@ $(document).ready(function() {
         $("div[class='due']").each(
             function(){
         if ($(this).text().split(" ")[3] == timeStamp.split(",")[0]) {
-            //alert('Task Due date is due today!');
+            alert('Task: Due date is due today!');
         }
         });
-        setTimeout(dueAlert, Math.random() * 1500);
+        setTimeout(dueAlert, 1000*60);
     }
     dueAlert();
 });
