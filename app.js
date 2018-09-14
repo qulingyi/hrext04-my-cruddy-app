@@ -23,66 +23,71 @@ $(document).ready(function() {
 
     //add text function, editing or not
     $(".add-text-btn").on("click", function() {
-    console.log("edit condition is : ", editing);
-    // using jquery selector to read input values
-    let inputKey = $(".user-input-title").val();
-    let inputValue = $(".user-input-body").val();
-    let dueDate = $("#due").val();
-    // clear values on the display
-    $(".user-input-title").val("");
-    $(".user-input-body").val("");
-    // console log the input values {key:value}
-    //console.log(inputKey, inputValue);
-    //https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-    localStorage.setItem(inputKey, inputValue);
-    console.log("num is :   ", counter);
-    // data-uniqID
+        console.log("edit condition is : ", editing);
+        // using jquery selector to read input values
+        let inputKey = $(".user-input-title").val();
+        let inputValue = $(".user-input-body").val();
+        let dueDate = $("#due").val();
+        // clear values on the display
+        $(".user-input-title").val("");
+        $(".user-input-body").val("");
+        // console log the input values {key:value}
+        //console.log(inputKey, inputValue);
+        //https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+        localStorage.setItem(inputKey, inputValue);
+        console.log("num is :   ", counter);
+        // data-uniqID
 
-    if(editing === false) {
+        if (editing === false) {
+            let realTime = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
+            console.log(realTime);
+            let itemHtml = '<div class="display-item" data-num = "' + counter + '" >' +
+                '<div class = "icon_container">' +
+                '<input class = "check" type = "checkbox" data-num = "' + counter + '"></input> '
+                + '<img class = "edit" data-num = "' + counter + '" data-storage-key="' + inputKey + '" ' +
+                'src = https://image.flaticon.com/icons/svg/1102/1102457.svg></img>'
+                + '<img class = "delete" data-num = "' + counter + '" data-storage-key="' + inputKey + '" ' +
+                'src = "https://image.flaticon.com/icons/svg/1101/1101702.svg" ></img></div>'
+                + '<div class = "container" data-num = "' + counter + '">'
+                + '<div class = "text" data-num = "' + counter + '" data-storage-key="' + inputKey + '">'
+                + '<p class = "title" contenteditable="true" data-num = "' + counter + '">' + inputKey
+                + '</p><p class="content" contenteditable="true" data-num = "' + counter + '">'
+                + localStorage.getItem(inputKey) + '</p></div>'
+                + '<div class = "due">' + " Due Date: " + dueDate + '</div>'
+                + '<div class = "time">' + " Created at: " + realTime + '</div></div></div>';
+            $("div[class='display-item'][data-num =" + "'" + counter + "'" + "]").replaceWith(itemHtml);
+            counter++;
+            addNew();
+            adding = !adding;
+            $("div[class='inputs']").css({"visibility": "hidden"});
+            console.log("this is append");
+        }
+        if (editing === true) {
+            let newTime = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
+            $(".add-text-btn").text("add text");
+            $("div[class='display-item'][data-num =" + "'" + clickNum + "'" + "]").replaceWith(
+                '<div class="display-item" data-num = "' + clickNum + '" >' +
+                '<div class = "icon_container">' +
+                '<input class = "check" type = "checkbox" data-num = "' + clickNum + '"></input> '
+                + '<img class = "edit" data-num = "' + clickNum + '" data-storage-key="' + inputKey + '" ' +
+                'src = https://image.flaticon.com/icons/svg/1102/1102457.svg></img>'
+                + '<img class = "delete" data-num = "' + clickNum + '" data-storage-key="' + inputKey + '" ' +
+                'src = "https://image.flaticon.com/icons/svg/1101/1101702.svg" ></img></div>'
+                + '<div class = "container" data-num = "' + clickNum + '">'
+                + '<div class = "text"  data-num = "' + clickNum + '" data-storage-key="' + inputKey + '">'
+                + '<p class = "title" contenteditable="true" data-num = "' + clickNum + '">' + inputKey
+                + '</p><p class="content" contenteditable="true" data-num = "' + clickNum + '">'
+                + localStorage.getItem(inputKey) + '</div>'
+                + '<div class = "due">' + " Due Date: " + dueDate + '</div>'
+                + '<div class = "time">' + " Created at: " + newTime + '</div></div></div>');
+            console.log("this is replace");
+            editing = false;
+            adding = false;
+            $("div[class='inputs']").css({"visibility": "hidden"});
+        }
+    });
 
-        let itemHtml = '<div class="display-item" data-num = "' + counter + '" >' +
-        '<div class = "icon_container">' +
-        '<input class = "check" type = "checkbox" data-num = "' + counter + '"></input> '
-            + '<img class = "edit" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
-            'src = https://image.flaticon.com/icons/svg/1102/1102457.svg></img>'
-            + '<img class = "delete" data-num = "' + counter + '" data-storage-key="'+inputKey+'" ' +
-            'src = "https://image.flaticon.com/icons/svg/1101/1101702.svg" ></img></div>'
-        + '<div class = "container" data-num = "' + counter + '">'
-        + '<div class = "text" data-num = "' + counter + '" data-storage-key="'+inputKey+'">'
-        + '<p class = "title">' +  inputKey + '</p><p class="content">' +  localStorage.getItem(inputKey) + '</p></div>'
-        + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
-        + '<div class = "time">' + " Created at: " +  timeStamp +  '</div></div></div>';
-        $("div[class='display-item'][data-num =" + "'"+ counter + "'" + "]").replaceWith(itemHtml);
-        counter++;
-        addNew();
-        adding = !adding;
-        $("div[class='inputs']").css({"visibility": "hidden"});
-        console.log("this is append");
-    }
-    if(editing === true) {
-        let newTime = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
-        $(".add-text-btn").text("add text");
-        $("div[class='display-item'][data-num =" + "'"+ clickNum + "'" + "]").replaceWith(
-            '<div class="display-item" data-num = "' + clickNum + '" >' +
-            '<div class = "icon_container">' +
-            '<input class = "check" type = "checkbox" data-num = "' + clickNum + '"></input> '
-            + '<img class = "edit" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'" ' +
-            'src = https://image.flaticon.com/icons/svg/1102/1102457.svg></img>'
-            + '<img class = "delete" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'" ' +
-            'src = "https://image.flaticon.com/icons/svg/1101/1101702.svg" ></img></div>'
-            + '<div class = "container" data-num = "' + clickNum + '">'
-            + '<div class = "text" data-num = "' + clickNum + '" data-storage-key="'+inputKey+'">'
-            + '<p class = "title">' +  inputKey + '</p><p class="content">'  +  localStorage.getItem(inputKey) + '</div>'
-            + '<div class = "due">' + " Due Date: " +  dueDate + '</div>'
-            + '<div class = "time">' + " Created at: " +  newTime +  '</div></div></div>');
-        console.log("this is replace");
-        editing = false;
-        adding = false;
-        $("div[class='inputs']").css({"visibility": "hidden"});
-    }
-  });
-
-
+    //dragula([document.getElementById($(".display"))]);
     //click add new note show inputs function
     $(".display").on("click", "img[class='add']", function(p) {
         adding = !adding;
@@ -123,21 +128,23 @@ $(document).ready(function() {
     });
 
     //edit text function
-    $(".display").on("click", 'img[class="edit"]', function(e) {
+    $(".display").on("click", 'img[class="edit"]' , function(e) {
         var temp = e.target.dataset.num;
         console.log("Look the temp: ", temp);
         if(editing === false || temp === clickNum) {
             editing = !editing;
         }
-        console.log("editing status now:   ", editing);
         if(editing === true) {
             $(".add-text-btn").text("Save");
             clickNum = e.target.dataset.num;
-            console.log("Look the clickNum: ", clickNum)
             localStorage.getItem(e.target.dataset.storageKey); // user-input-body
             // set those values in the form fields
-            $(".user-input-title").val(e.target.dataset.storageKey);
-            $(".user-input-body").val(localStorage.getItem(e.target.dataset.storageKey));
+            console.log("title is: ",$("p[class='title'][data-num =" + "'"
+                + e.target.dataset.num + "'" + "]").text());
+            $(".user-input-title").val($("p[class='title'][data-num =" + "'"
+                + e.target.dataset.num + "'" + "]").text());
+            $(".user-input-body").val($("p[class='content'][data-num =" + "'"
+                + e.target.dataset.num + "'" + "]").text());
             let po = $("div[class='display-item'][data-num =" + "'"+ e.target.dataset.num + "'" + "]");
             let left_po = po.position().left + 20;
             $("div[class='inputs']").css({"left": "" + left_po  + "px"})
@@ -158,7 +165,7 @@ $(document).ready(function() {
     $(".display").on("click", "img[class='delete']", function(d) {
             // $("img[class='delete'][data-num =" + "'"+ d.target.dataset.num + "'" + "]").css(
             //     {"box-shadow": "2px 2px 1px grey"});
-            var r = confirm("Want to delete note: " + d.target.dataset.num +  "?");
+            var r = confirm("Want to delete note: " + " '" + d.target.dataset.storageKey + "' " +  "?");
             if (r == true) {
                 $("div[data-num =" + "'" + d.target.dataset.num + "'" + "]").remove();
              } //else {

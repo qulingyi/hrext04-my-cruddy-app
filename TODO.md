@@ -8,6 +8,7 @@
  # Detail Todo
  - [ ] Front End
    - [ ] add status/priority and allow for sorting 
+   - [X] able to edit on the note
    - [X] new note button at beginning and end
    - [X] alert due date function
    - [X] accumulating text in display 
