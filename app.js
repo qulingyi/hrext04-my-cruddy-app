@@ -53,7 +53,7 @@ $(document).ready(function() {
                 + '<p class = "title" contenteditable="true" data-num = "' + counter + '">' + inputKey
                 + '</p><p class="content" contenteditable="true" data-num = "' + counter + '">'
                 + localStorage.getItem(inputKey) + '</p></div>'
-                + '<div class = "due">' + " Due Date: " + dueDate + '</div>'
+                + '<div class = "due" data-storage-key="' + inputKey + '">' + " Due Date: " + dueDate + '</div>'
                 + '<div class = "time">' + " Created at: " + realTime + '</div></div></div>';
             $("div[class='display-item'][data-num =" + "'" + counter + "'" + "]").replaceWith(itemHtml);
             counter++;
@@ -78,7 +78,7 @@ $(document).ready(function() {
                 + '<p class = "title" contenteditable="true" data-num = "' + clickNum + '">' + inputKey
                 + '</p><p class="content" contenteditable="true" data-num = "' + clickNum + '">'
                 + localStorage.getItem(inputKey) + '</div>'
-                + '<div class = "due">' + " Due Date: " + dueDate + '</div>'
+                + '<div class = "due" data-storage-key="' + inputKey + '">' + " Due Date: " + dueDate + '</div>'
                 + '<div class = "time">' + " Created at: " + newTime + '</div></div></div>');
             console.log("this is replace");
             editing = false;
@@ -206,7 +206,8 @@ $(document).ready(function() {
         $("div[class='due']").each(
             function(){
         if ($(this).text().split(" ")[3] == timeStamp.split(",")[0]) {
-            alert('Task: Due date is due today!');
+            alert("Task: " + "' "+ $(this).parent().children(':first-child')
+                .children(':first-child').text() + "' "+ " Due date is due today!");
         }
         });
         setTimeout(dueAlert, 1000*60);

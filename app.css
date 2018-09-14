@@ -47,6 +47,7 @@ body {
     font-size: 15px;
     border: none;
     margin: 5px;
+    z-index: 5;
 }
 .user-input-body {
     height: 60px;
@@ -106,7 +107,6 @@ body {
     Helvetica Neue,Ubuntu,Arial,sans-serif;
     margin-top: 60px;
     margin-bottom: 60px;
-    contenteditable:true;
 }
 
 .display {
@@ -207,6 +207,7 @@ input[type=checkbox]
     word-wrap: break-word;
     position: relative;
     padding-bottom: 5px;
+    contenteditable: true;
 }
 
 .text:after {
