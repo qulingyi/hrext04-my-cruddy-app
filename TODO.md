@@ -43,8 +43,8 @@
 
  ## Next Steps
 
- - [ ] factor out common functionality
- - [ ] testing
+ - [X] factor out common functionality
+ - [X] testing
 
 
   ## Feature list
