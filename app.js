@@ -5,7 +5,7 @@ $(document).ready(function() {
     let adding = false;
     let clickNum;
     //set due date selection min date as today
-    due.min = new Date().toISOString().split("T")[0];
+    due.min = moment().format().split("T")[0];
     due.value = due.min;
     //get real-time and display in format 'yyyy-mm-dd, h:mm:ss'
     let timeStamp = moment().format().split("T")[0] + ", " + moment().format().split("T")[1].split("-")[0];
@@ -86,6 +86,8 @@ $(document).ready(function() {
     //click add new note show inputs function
     $(".display").on("click", "img[class='add']", function(p) {
         adding = !adding;
+        $(".user-input-title").val("");
+        $(".user-input-body").val("");
         let po = $("img[class='add'][data-num =" + "'"+ p.target.dataset.num + "'" + "]");
         let left_po = po.position().left;
         $("div[class='inputs']").css({"left": "" + left_po + "px"})
@@ -103,6 +105,7 @@ $(document).ready(function() {
      $("p[class='close']").on("click", function() {
          $("div[class='inputs']").css({"visibility": "hidden"});
          adding = !adding;
+         editing = !editing;
     });
 
     //checkbox checked function
